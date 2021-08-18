@@ -10,11 +10,22 @@
     <link rel="stylesheet" href="../node_modules/bootswatch/dist/darkly/bootstrap.min.css">
 
     <link rel="stylesheet" href="../style.css">
-
+    <link rel="stylesheet" href="../fontawesome.min.css">
+    <link rel="stylesheet" href="../solid.min.css">
   </head>
   <body>
-    <h1>Electron CRUD App</h1>
-    
-    <script src="./renderers/index.js"></script>
+    <div class="container mt-4">
+      <header class="sticky-top">
+        <h1 class="text-center">Electron Blog App</h1>
+        <div class="d-flex justify-content-between mt-4">
+          <h3>Posts</h3>
+          <button id="btnAdd" type="button" class="btn btn-primary">Add New Post</button>
+        </div>
+      </header>
+      <div id="postsList" class="posts-container">        
+      </div>
+    </div>
+
+    <script src="../renderers/index.js"></script>
   </body>
 </html>

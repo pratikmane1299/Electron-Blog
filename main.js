@@ -1,12 +1,16 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, ipcMain} = require('electron')
 const path = require('path')
 
 const isProd = process.env.NODE_ENV === 'production' ? true : false
 
+let posts = []
+
 try {
   require('electron-reloader')(module)
 } catch (_) {}
+
+let modalWindow
 
 function createWindow () {
   // Create the browser window.
@@ -15,6 +19,7 @@ function createWindow () {
     height: 600,
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false,
     }
   })
 
@@ -23,6 +28,42 @@ function createWindow () {
 
   // Open the DevTools.
   if (!isProd) mainWindow.webContents.openDevTools()
+
+  mainWindow.on('ready-to-show', () => {
+    mainWindow.webContents.send('posts', posts)
+    // console.log(posts)
+  })
+
+  ipcMain.on('open-post-form-modal', (event) => {
+    if (!modalWindow) {
+      modalWindow = new BrowserWindow({
+        width:400,
+        height: 400,
+        parent: mainWindow,
+        webPreferences: {
+          nodeIntegration: true,
+          contextIsolation: false,
+        }
+      })
+
+      modalWindow.loadFile('./windows/post-modal.html')
+
+      modalWindow.on('close', () => {
+        modalWindow = null
+      })
+    }
+  })
+
+  ipcMain.on('add-new-post', (event, post) => {
+    posts = [post, ...posts]
+
+    mainWindow.webContents.send('posts', posts)
+  })
+
+  ipcMain.on('delete-post', (e, post) => {
+    posts = posts.filter(p => p.id !== post.id)
+    mainWindow.webContents.send('posts', posts)
+  })
 }
 
 // This method will be called when Electron has finished

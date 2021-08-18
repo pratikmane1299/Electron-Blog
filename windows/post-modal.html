@@ -1,0 +1,20 @@
+<style>
+  @import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
+  @import url('../node_modules/bootswatch/dist/darkly/bootstrap.min.css');
+</style>
+
+<div class="w-100 d-flex justify-content-center">
+  <form id="postForm" class="mt-4">
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="title" name="title">
+      <label for="title">Title</label>
+    </div>
+    <div class="form-floating mb-3">
+      <textarea type="text" class="form-control" id="body" name="body" rows="3"></textarea>
+      <label for="body">Body</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Post</button>
+  </form>
+</div>
+
+<script src="../renderers/post-modal.js"></script>
