@@ -23,6 +23,6 @@
   "dependencies": {
     "bootstrap": "^5.1.1",
     "bootswatch": "^5.1.1",
-    "electron-store": "^8.0.0"
+    "electron-store": "^8.0.2"
   }
 }
