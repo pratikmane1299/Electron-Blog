@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.1.1",
-    "bootswatch": "^5.1.1",
+    "bootswatch": "^5.2.0",
     "electron-store": "^8.0.0"
   }
 }
